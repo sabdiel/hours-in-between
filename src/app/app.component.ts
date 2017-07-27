@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnChanges } from '@angular/core';
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  from = { hour: null, minute: 0, second: null };
+  to = { hour: null, minute: 0, second: null };
+  hoursInBetween: string = '00 : 00';
+
+  onTimeChange() {
+    const twentyFourHours = 24;
+
+    if (this.to.hour > this.from.hour)
+      this.hoursInBetween = Math.abs(this.from.hour - this.to.hour).toString()
+        + ' : ' + this.formatMinutes(Math.abs(this.from.minute - this.to.minute));
+    else
+      this.hoursInBetween = Math.abs((this.from.hour - this.to.hour) -
+        twentyFourHours).toString() + ' : ' + this.formatMinutes(Math.abs(this.from.minute - this.to.minute));
+  }
+
+  private formatMinutes(minutes) {
+    if (minutes == 0) return '00';
+    if (minutes < 10) return '0' + minutes;
+
+    return minutes;
+  }
+
 }
