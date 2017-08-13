@@ -9,16 +9,16 @@ import { NgForm } from "@angular/forms";
 export class AppComponent {
   from = { hour: null, minute: 0, second: null };
   to = { hour: null, minute: 0, second: null };
-  hoursInBetween: string = '00 : 00';
+  timeDuration: string = '00 : 00';
 
   onTimeChange() {
     const twentyFourHours = 24;
 
     if (this.to.hour > this.from.hour)
-      this.hoursInBetween = Math.abs(this.from.hour - this.to.hour).toString()
+      this.timeDuration = Math.abs(this.from.hour - this.to.hour).toString()
         + ' : ' + this.formatMinutes(Math.abs(this.from.minute - this.to.minute));
     else
-      this.hoursInBetween = Math.abs((this.from.hour - this.to.hour) -
+      this.timeDuration = Math.abs((this.from.hour - this.to.hour) -
         twentyFourHours).toString() + ' : ' + this.formatMinutes(Math.abs(this.from.minute - this.to.minute));
   }
 
